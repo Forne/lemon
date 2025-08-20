@@ -8,5 +8,18 @@
 import SwiftUI
 
 struct LibraryView: View {
-    var body: some View { Text("Library") }
+    @EnvironmentObject private var router: Router
+    
+    var body: some View {
+        List {
+            Section("Popular") {
+                Button("Movie 10") {
+                    router.open(.movie(provider: .tmdb, id: 10))
+                }
+                Button("Movie 11") {
+                    router.open(.movie(provider: .tmdb, id: 11))
+                }
+            }
+        }
+    }
 }

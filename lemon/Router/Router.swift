@@ -19,6 +19,10 @@ public final class Router: ObservableObject {
         return dict
     }()
     
+    public func bindingPath(for tab: RootTab) -> NavigationPath? {
+        self.paths[tab]
+    }
+    
     public func binding(for tab: RootTab) -> Binding<NavigationPath> {
         Binding(
             get: { self.paths[tab] ?? NavigationPath() },
@@ -32,11 +36,15 @@ public final class Router: ObservableObject {
         case smart(source: RootTab? = nil)
     }
     
-    public func open(_ route: AppRoute, context: Context = .smart()) {
+    public func open(_ route: AppRoute, context: Context = .stayOnCurrentTab) {
         let targetTab = self.resolveTab(for: route, context: context)
         let stack = stackFor(route)
-        setStack(stack, on: targetTab)
-        selectedTab = targetTab
+        if targetTab == selectedTab {
+            push(route, on: targetTab)
+        } else {
+            setStack(stack, on: targetTab)
+            selectedTab = targetTab
+        }
     }
     
     public func push(_ route: AppRoute, on tab: RootTab? = nil) {
@@ -48,6 +56,13 @@ public final class Router: ObservableObject {
         }
         paths[t] = path
         selectedTab = t
+    }
+    
+    public func pop(on tab: RootTab? = nil) {
+        let t = tab ?? selectedTab
+        var path = paths[t] ?? NavigationPath()
+        if !path.isEmpty { path.removeLast() }
+        paths[t] = path
     }
     
     public func setStack(_ routes: [AppRoute], on tab: RootTab) {

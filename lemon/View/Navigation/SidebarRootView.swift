@@ -7,9 +7,10 @@
 
 import SwiftUI
 
+#if os(macOS)
 public struct SidebarRootView: View {
     @EnvironmentObject private var router: Router
-
+    
     public init() {}
 
     public var body: some View {
@@ -38,3 +39,4 @@ public struct SidebarRootView: View {
         }
     }
 }
+#endif

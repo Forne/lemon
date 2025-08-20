@@ -36,7 +36,8 @@ fileprivate struct AdaptiveRoot_iOS: View {
                 TabsRootView()
             } else {
                 // iPad sidebar
-                SidebarRootView()
+                //SidebarRootView()
+                TabsRootView() // TODO
             }
         } else {
             // iPhone

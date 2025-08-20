@@ -13,9 +13,18 @@ struct MovieDetailsView: View {
     let id: Int
 
     var body: some View {
-        VStack(spacing: 16) {
-            Text("Movie #\(id) [\(provider.rawValue)]").font(.title2)
+        VStack() {
+            Text("Movie #\(id) [\(provider.rawValue)]").font(.title)
+            Button("Person 9") {
+                router.open(.person(provider: .tmdb, id: 9))
+            }
+            Spacer()
         }
-        .padding()
+#if os(tvOS)
+        //.onExitCommand { router.pop() }
+        .toolbar(.hidden, for: .tabBar)
+#endif
+        .navigationTitle("Movie #\(id)")
+        
     }
 }
