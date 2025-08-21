@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public enum Provider: String, CaseIterable, Hashable, Identifiable {
+public enum Provider: String, CaseIterable, Identifiable, Sendable, Codable, Hashable {
     case imdb
     case tmdb
     case kinopoisk
@@ -19,9 +19,8 @@ public enum Provider: String, CaseIterable, Hashable, Identifiable {
     
     var localizedName: String {
         switch self {
-            case .kinopoisk:
-                return NSLocalizedString("provider_kinopoisk", comment: "Kinopoisk")
-            default: return self.rawValue.uppercased()
+        case .kinopoisk: return NSLocalizedString("provider_kinopoisk", comment: "Kinopoisk")
+        default: return self.rawValue.uppercased()
         }
     }
 }
