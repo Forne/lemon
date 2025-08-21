@@ -37,6 +37,7 @@ public struct Movie: Sendable, Hashable, Identifiable {
     let cast: [PersonRef]
     let crew: [PersonRef]
     let similar: [MovieRef]
+    let sequelsAndPrequels: [MovieRef]
     // let lists: [List]
     // let reviews: [Review]
 }
