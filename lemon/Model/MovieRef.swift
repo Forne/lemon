@@ -21,7 +21,7 @@ struct MovieRef: Sendable, Hashable, Identifiable {
 
 extension MovieRef {
     static var exampleFromKinopoisk: [MovieRef] {
-        let data: KinopoiskPaged<KinopoiskMovie>? = try? Bundle.main.decode(from: "KinopoiskMovieList")
+        let data: KinopoiskPaged<KinopoiskMovieRef>? = try? Bundle.main.decode(from: "KinopoiskMovieList")
         return data?.docs.map(MovieRef.init(from: )) ?? []
     }
     

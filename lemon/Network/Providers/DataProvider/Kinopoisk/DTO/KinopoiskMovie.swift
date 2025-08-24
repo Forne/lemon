@@ -15,32 +15,36 @@ public struct KinopoiskMovie: Identifiable, Codable, Hashable {
     let typeNumber: KinopoiskMovieTypeNumber?
     let year: Int?
     let description, shortDescription, slogan: String?
-    let status: String? // TODO
+    let status: KinopoiskMovieStatus?
     let movieLength, totalSeriesLength, seriesLength, ageRating: Int?
     let ratingMpaa: String?
     let top10, top250: Int?
     let isSeries, ticketsOnSale: Bool?
-    
-    struct ExternalId: Codable, Hashable {
-        let kpHD: String?
-        let imdb: String?
-        let tmdb: Int?
-    }
     
     let logo: KinopoiskLogo?
     let poster: KinopoiskImage?
     let backdrop: KinopoiskImage?
     let rating: KinopoiskRatings?
     let votes: KinopoiskVotes?
+    let reviewInfo: KinopoiskReviewInfo?
+    // budget
+    // fees
+    // premiere
+    // watchability
+    // audience
+    // lists
+    // networks
     
     // Relations
     let names: [KinopoiskName]?
     let facts: [KinopoiskFact]?
+    // let videos: []?
     let genres: [KinopoiskSimpleItem]?
     let countries: [KinopoiskSimpleItem]?
     let persons: [KinopoiskPersonRef]?
-    let similarMovies: [KinopoiskMovie]?
-    let sequelsAndPrequels: [KinopoiskMovie]?
+    let seasonsInfo: [KinopoiskSeasonInfo]?
+    let similarMovies: [KinopoiskMovieRef]?
+    let sequelsAndPrequels: [KinopoiskMovieRef]?
 }
 
 extension KinopoiskMovie {
@@ -48,12 +52,6 @@ extension KinopoiskMovie {
         let data: KinopoiskMovie? = try? Bundle.main.decode(from: "KinopoiskMovieDetails")
         return data!
     }
-}
-
-public struct KinopoiskName: Codable, Hashable {
-    let name: String
-    let language: String?
-    let type: String?
 }
 
 struct KinopoiskExternalIDs: Codable, Hashable {
@@ -88,6 +86,12 @@ enum KinopoiskMovieStatus: String, Codable, Hashable {
     case postProduction = "post-production"
 }
 
+public struct KinopoiskName: Codable, Hashable {
+    let name: String
+    let language: String?
+    let type: String?
+}
+
 public struct KinopoiskRatings: Codable, Hashable {
     let kp: Double?
     let imdb: Double?
@@ -104,4 +108,15 @@ public struct KinopoiskVotes: Codable, Hashable {
     let filmCritics: Int?
     let russianFilmCritics: Int?
     let await: Int?
+}
+
+struct KinopoiskReviewInfo: Codable, Hashable {
+    var count: String?
+    var positiveCount: String?
+    var percentage: String?
+}
+
+struct KinopoiskSeasonInfo: Codable, Hashable {
+    var number: Int?
+    var episodesCount: Int?
 }

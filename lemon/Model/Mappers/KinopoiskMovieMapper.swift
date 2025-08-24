@@ -35,7 +35,7 @@ extension Movie {
         // Runtime
         self.runtime = kp.movieLength
         self.isAdult = (kp.ageRating ?? 18) >= 18
-        self.status = kp.status ?? ""
+        self.status = kp.status?.rawValue ?? "" // TODO
         
         // Images
         self.logo = kp.logo?.url.map {

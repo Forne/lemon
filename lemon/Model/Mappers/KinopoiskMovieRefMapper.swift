@@ -8,7 +8,7 @@
 import Foundation
 
 extension MovieRef {
-    init(from kp: KinopoiskMovie) {
+    init(from kp: KinopoiskMovieRef) {
         self.id = kp.id
         self.provider = .kinopoisk
         
@@ -33,14 +33,6 @@ extension MovieRef {
             ImageAsset(
                 url: $0,
                 type: .poster,
-                source: .kinopoisk
-            )
-        }
-        
-        self.backdrop = kp.backdrop?.url.map {
-            ImageAsset(
-                url: $0,
-                type: .backdrop,
                 source: .kinopoisk
             )
         }
