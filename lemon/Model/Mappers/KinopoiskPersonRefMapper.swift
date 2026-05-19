@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import KinopoiskAPI
 
 extension PersonRef {
-    init(from kp: KinopoiskPersonRef) {
+    init(from kp: KinopoiskAPI.PersonMovieRef) {
         self.id = kp.id
         self.provider = .kinopoisk
         
@@ -28,5 +29,17 @@ extension PersonRef {
                 source: .kinopoisk
             )
         }
+    }
+}
+
+extension PersonRef {
+    static var exampleFromKinopoisk: PersonRef {
+        let data: KinopoiskAPI.Movie? = try? Bundle.main.decode(from: "KinopoiskMovieDetails")
+        return Movie.init(from: data!).cast[5]
+    }
+    
+    static var exampleListFromKinopoisk: [PersonRef] {
+        let data: KinopoiskAPI.Movie? = try? Bundle.main.decode(from: "KinopoiskMovieDetails")
+        return Movie.init(from: data!).cast
     }
 }

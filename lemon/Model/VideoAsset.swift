@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct VideoAsset: Sendable, Hashable, Codable {
+struct VideoAsset: Hashable, Sendable {
     var url: URL
     var type: VideoStreamType
     var source: Provider

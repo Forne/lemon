@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ImageAsset: Sendable, Hashable, Codable {
+struct ImageAsset: Hashable, Sendable {
     var url: URL
     var width: Int?
     var height: Int?

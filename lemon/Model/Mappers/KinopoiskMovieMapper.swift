@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import KinopoiskAPI
 
 extension Movie {
-    init(from kp: KinopoiskMovie) {
+    init(from kp: KinopoiskAPI.Movie) {
         self.id = kp.id
+        self.provider = .kinopoisk
         
         // External IDs
         self.externalIDs = ExternalIDs(
@@ -85,5 +87,12 @@ extension Movie {
             .map(MovieRef.init(from:))) ?? []
         self.sequelsAndPrequels = (kp.sequelsAndPrequels?
             .map(MovieRef.init(from:))) ?? []
+    }
+}
+
+extension Movie {
+    static var exampleFromKinopoisk: Movie {
+        let data: KinopoiskAPI.Movie? = try? Bundle.main.decode(from: "KinopoiskMovieDetails")
+        return Movie.init(from: data!)
     }
 }

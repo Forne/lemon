@@ -7,37 +7,38 @@
 
 import Foundation
 
-public struct Movie: Sendable, Hashable, Identifiable {
-    public var id: Int
+public struct Movie: Hashable, Sendable, Identifiable {
+    public let id: Int
+    public let provider: Provider
     var externalIDs: ExternalIDs
     var type: String // TODO: enum
     var isSerial: Bool
     var title, enTitle: String?
-    let year: Int?
-    let description, overview, tagline: String?
-    let runtime: Int?
-    let isAdult: Bool
-    let status: String? // TODO: enum
-    
+    var year: Int?
+    var description, overview, tagline: String?
+    var runtime: Int?
+    var isAdult: Bool
+    var status: String? // TODO: enum
+
     // Images / Videos
     // TODO: By devices
-    let logo: ImageAsset?
-    let poster: ImageAsset?
-    let backdrop: ImageAsset?
-    let trailer: URL? // TODO: struct
-    
+    var logo: ImageAsset?
+    var poster: ImageAsset?
+    var backdrop: ImageAsset?
+    var trailer: URL? // TODO: struct
+
     // Meta
-    let genres: [String]
-    let countries: [String]
-    let ratings: MovieRatings
-    let companies: [String]
-    
+    var genres: [String]
+    var countries: [String]
+    var ratings: MovieRatings
+    var companies: [String]
+
     // Relations
     // let images: [Image]
-    let cast: [PersonRef]
-    let crew: [PersonRef]
-    let similar: [MovieRef]
-    let sequelsAndPrequels: [MovieRef]
+    var cast: [PersonRef]
+    var crew: [PersonRef]
+    var similar: [MovieRef]
+    var sequelsAndPrequels: [MovieRef]
     // let lists: [List]
     // let reviews: [Review]
 }
@@ -52,21 +53,20 @@ extension Movie {
         guard let value else { return String() }
         return value
     }
-    
+
+    var castText: String? {
+        return self.cast
+            .compactMap { $0.name?.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+            .prefix(5)
+            .joined(separator: ", ")
+    }
+
     var genresText: String {
         return self.genres.joined(separator: ", ")
     }
-    
+
     var countriesText: String {
         return self.countries.joined(separator: ", ")
-    }
-    
-    static var exampleFromKinopoisk: Movie {
-        let data: KinopoiskMovie? = try? Bundle.main.decode(from: "KinopoiskMovieDetails")
-        return Movie.init(from: data!)
-    }
-    
-    static var example: Movie {
-        return exampleFromKinopoisk
     }
 }

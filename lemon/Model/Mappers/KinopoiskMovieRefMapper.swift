@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import KinopoiskAPI
 
 extension MovieRef {
-    init(from kp: KinopoiskMovieRef) {
+    init(from kp: KinopoiskAPI.MovieRef) {
         self.id = kp.id
         self.provider = .kinopoisk
         
@@ -19,6 +20,8 @@ extension MovieRef {
         // Titles
         self.title = kp.name
         self.enTitle = kp.enName
+        
+        self.year = kp.year
         
         // Ratings
         self.ratings = MovieRatings(
@@ -36,5 +39,16 @@ extension MovieRef {
                 source: .kinopoisk
             )
         }
+    }
+}
+
+extension MovieRef {
+    static var exampleFromKinopoisk: [MovieRef] {
+        let data: KinopoiskAPI.Pagination<KinopoiskAPI.MovieRef>? = try? Bundle.main.decode(from: "KinopoiskMovieList")
+        return data?.docs.map(MovieRef.init(from: )) ?? []
+    }
+    
+    static var examplesFromKinopoisk: [MovieRef] {
+        return exampleFromKinopoisk
     }
 }

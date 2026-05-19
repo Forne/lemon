@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct MovieRatings: Codable, Hashable, Sendable {
+public struct MovieRatings: Hashable, Sendable {
     public var values: [RatingProviders: Double]
     
     public func value(for provider: RatingProviders) -> Double? {
