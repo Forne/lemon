@@ -15,7 +15,7 @@ public struct Movie: Hashable, Sendable, Identifiable {
     var isSerial: Bool
     var title, enTitle: String?
     var year: Int?
-    var description, overview, tagline: String?
+    var overview, tagline: String?
     var runtime: Int?
     var isAdult: Bool
     var status: String? // TODO: enum

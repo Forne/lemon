@@ -28,7 +28,6 @@ extension Movie {
         
         // Year & Descriptions
         self.year = nil
-        self.description = nil
         self.overview = tmdb.overview
         self.tagline = tmdb.tagline
         

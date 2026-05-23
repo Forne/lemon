@@ -30,8 +30,7 @@ extension Movie {
         
         // Year & Descriptions
         self.year = kp.year
-        self.description = kp.description
-        self.overview = kp.shortDescription
+        self.overview = kp.description ?? kp.shortDescription
         self.tagline = kp.slogan
         
         // Runtime

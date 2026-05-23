@@ -31,7 +31,6 @@ extension Movie {
 
         // Year & Descriptions
         self.year = movie.year
-        self.description = nil
         self.overview = movie.plot
         self.tagline = nil
 
