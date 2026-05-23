@@ -31,14 +31,14 @@ extension MovieRef {
             ImageAsset(
                 url: URL(string: movie.posters!.big!)!,
                 type: .poster,
-                source: .kinopoisk
+                source: .kinopub
             ) : nil
         
         self.backdrop = movie.posters?.wide != nil ?
         ImageAsset(
             url: URL(string: movie.posters!.wide!)!,
             type: .poster,
-            source: .kinopoisk
+            source: .kinopub
         ) : nil
         //self.trailer = movie.trailer?.url != nil ? URL(string: movie.trailer!.url!) : nil
         

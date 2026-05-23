@@ -24,7 +24,7 @@ extension PersonRef {
         // Images
         self.photo = tmdb.profilePath != nil ? ImageAsset(
             url: URL(string: "https://image.tmdb.org/t/p/h632/\(tmdb.profilePath!)")!,
-            type: .poster,
+            type: .profile,
             source: .tmdb
         ) : nil
     }
